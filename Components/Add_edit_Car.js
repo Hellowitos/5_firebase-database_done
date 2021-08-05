@@ -18,7 +18,7 @@ const Add_edit_Car = ({navigation,route}) => {
         brand: '',
         model: '',
         year: '',
-        licensePlate: '',
+        licensePlate: ''
     }
 
     const [newCar,setNewCar] = useState(initialState);
@@ -37,13 +37,17 @@ const Add_edit_Car = ({navigation,route}) => {
         };
     }, []);
 
-    const changeSelect = (name,event) => {
+    const changeTextInput = (name,event) => {
         setNewCar({...newCar, [name]: event});
     }
 
     const handleSave = () => {
 
         const { brand, model, year, licensePlate } = newCar;
+
+        if(brand.length === 0 || model.length === 0 || year.length === 0 || licensePlate.length === 0 ){
+            return Alert.alert('Et af felterne er tomme!');
+        }
 
         if(isEditCar){
             const id = route.params.car[0];
@@ -80,38 +84,20 @@ const Add_edit_Car = ({navigation,route}) => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Brand</Text>
-                    <TextInput
-                        value={newCar.brand}
-                        onChangeText={(event) => changeSelect("brand",event)}
-                        style={styles.input}
-                    />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Model</Text>
-                    <TextInput
-                        value={newCar.model}
-                        onChangeText={(event) => changeSelect("model",event)}
-                        style={styles.input}
-                    />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Year</Text>
-                    <TextInput
-                        value={newCar.year}
-                        onChangeText={(event) => changeSelect("year",event)}
-                        style={styles.input}
-                    />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>License Plate</Text>
-                    <TextInput
-                        value={newCar.licensePlate}
-                        onChangeText={(event) => changeSelect("licensePlate",event)}
-                        style={styles.input}
-                    />
-                </View>
+                {
+                    Object.keys(newCar).map((key,index) =>{
+                        return(
+                            <View style={styles.row} key={index}>
+                                <Text style={styles.label}>{key}</Text>
+                                <TextInput
+                                    value={newCar[key]}
+                                    onChangeText={(event) => changeTextInput(key,event)}
+                                    style={styles.input}
+                                />
+                            </View>
+                        )
+                    })
+                }
                 {/*Hvis vi er inde på edit car, vis save changes i stedet for add car*/}
                 <Button title={ isEditCar ? "Save changes" : "Add car"} onPress={() => handleSave()} />
             </ScrollView>

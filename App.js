@@ -12,22 +12,23 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
-const firebaseConfig = {
-    apiKey: "AIzaSyASNfvVVVdRszY-ymthux_LHlfUhw_6KE4",
-    authDomain: "fir-advanced-99de4.firebaseapp.com",
-    databaseURL: "https://fir-advanced-99de4-default-rtdb.firebaseio.com",
-    projectId: "fir-advanced-99de4",
-    storageBucket: "fir-advanced-99de4.appspot.com",
-    messagingSenderId: "911562934749",
-    appId: "1:911562934749:web:d7962e40a59c25cd630e34",
-    measurementId: "G-6WQV0JJ6LB"
-};
-
 
 export default function App() {
+
+    const Stack = createStackNavigator();
+    const Tab = createBottomTabNavigator();
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyASNfvVVVdRszY-ymthux_LHlfUhw_6KE4",
+        authDomain: "fir-advanced-99de4.firebaseapp.com",
+        databaseURL: "https://fir-advanced-99de4-default-rtdb.firebaseio.com",
+        projectId: "fir-advanced-99de4",
+        storageBucket: "fir-advanced-99de4.appspot.com",
+        messagingSenderId: "911562934749",
+        appId: "1:911562934749:web:d7962e40a59c25cd630e34",
+        measurementId: "G-6WQV0JJ6LB"
+    };
+
 
     // Vi kontrollerer at der ikke allerede er en initialiseret instans af firebase
     // Så undgår vi fejlen Firebase App named '[DEFAULT]' already exists (app/duplicate-app).
@@ -36,7 +37,7 @@ export default function App() {
         firebase.initializeApp(firebaseConfig);
     }
 
-    const StackNavigation = () =>{
+    const StackNavigation = () => {
         return(
             <Stack.Navigator>
                 <Stack.Screen name={'Car List'} component={CarList}/>
@@ -50,18 +51,9 @@ export default function App() {
     return (
       <NavigationContainer>
           <Tab.Navigator>
-              <Tab.Screen name={'Home'} component={StackNavigation} options={{tabBarIcon: () => ( <Ionicons name="home" size={20} />)}}/>
+              <Tab.Screen name={'Home'} component={StackNavigation} options={{tabBarIcon: () => ( <Ionicons name="home" size={20} />),headerShown:null}}/>
               <Tab.Screen name={'Add'} component={Add_edit_Car} options={{tabBarIcon: () => ( <Ionicons name="add" size={20} />)}}/>
           </Tab.Navigator>
       </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

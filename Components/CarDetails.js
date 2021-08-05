@@ -22,23 +22,17 @@ const CarDetails = ({route,navigation}) => {
         navigation.navigate('Edit Car', { car });
     };
 
-    console.log(route.params.car[1],"cardetails")
-
     // Vi spørger brugeren om han er sikker
     const confirmDelete = () => {
+        /*Er det mobile?*/
         if(Platform.OS ==='ios' || Platform.OS ==='android'){
             Alert.alert('Are you sure?', 'Do you want to delete the car?', [
                 { text: 'Cancel', style: 'cancel' },
                 // Vi bruger this.handleDelete som eventHandler til onPress
                 { text: 'Delete', style: 'destructive', onPress: () => handleDelete() },
             ]);
-        } else {
-            if(confirm('Er du sikker på du vil slette denne bil?')){
-                handleDelete()
-            }
         }
     };
-
 
     // Vi sletter den aktuelle bil
     const  handleDelete = () => {
@@ -68,22 +62,18 @@ const CarDetails = ({route,navigation}) => {
         <View style={styles.container}>
             <Button title="Edit" onPress={ () => handleEdit()} />
             <Button title="Delete" onPress={() => confirmDelete()} />
-            <View style={styles.row}>
-                <Text style={styles.label}>Brand </Text>
-                <Text style={styles.value}>{car.brand}</Text>
-            </View>
-            <View style={styles.row}>
-                <Text style={styles.label}>Model</Text>
-                <Text style={styles.value}>{car.model}</Text>
-            </View>
-            <View style={styles.row}>
-                <Text style={styles.label}>Year</Text>
-                <Text style={styles.value}>{car.year}</Text>
-            </View>
-            <View style={styles.row}>
-                <Text style={styles.label}>License Plate</Text>
-                <Text style={styles.value}>{car.licensePlate}</Text>
-            </View>
+            {
+                Object.entries(car).map((item,index)=>{
+                    return(
+                        <View style={styles.row} key={index}>
+                            {/*Vores car keys navn*/}
+                            <Text style={styles.label}>{item[0]} </Text>
+                            {/*Vores car values navne */}
+                            <Text style={styles.value}>{item[1]}</Text>
+                        </View>
+                    )
+                })
+            }
         </View>
     );
 }
