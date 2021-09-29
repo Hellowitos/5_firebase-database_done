@@ -8,6 +8,7 @@ const CarDetails = ({route,navigation}) => {
     const [car,setCar] = useState({});
 
     useEffect(() => {
+        /*Henter car values og sætter dem*/
         setCar(route.params.car[1]);
 
         /*Når vi forlader screen, tøm object*/
@@ -49,7 +50,6 @@ const CarDetails = ({route,navigation}) => {
         } catch (error) {
             Alert.alert(error.message);
         }
-
     };
 
 

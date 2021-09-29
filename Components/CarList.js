@@ -24,7 +24,6 @@ const CarList = ({navigation}) => {
         return <Text>Loading...</Text>;
     }
 
-
    const handleSelectCar = id => {
         /*Her søger vi direkte i vores array af biler og finder bil objektet som matcher idet vi har tilsendt*/
         const car = Object.entries(cars).find( car => car[0] === id /*id*/)
@@ -33,7 +32,6 @@ const CarList = ({navigation}) => {
 
     // Flatlist forventer et array. Derfor tager vi alle values fra vores cars objekt, og bruger som array til listen
     const carArray = Object.values(cars);
-    // Vi skal også bruge alle IDer, så vi tager alle keys også.
     const carKeys = Object.keys(cars);
 
     return (
