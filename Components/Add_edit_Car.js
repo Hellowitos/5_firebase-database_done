@@ -85,7 +85,7 @@ const Add_edit_Car = ({navigation,route}) => {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 {
-                    Object.keys(newCar).map((key,index) =>{
+                    Object.keys(initialState).map((key,index) =>{
                         return(
                             <View style={styles.row} key={index}>
                                 <Text style={styles.label}>{key}</Text>
